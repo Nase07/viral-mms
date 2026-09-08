@@ -1,3 +1,4 @@
+new viral video 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -285,14 +286,11 @@ footer a{
 
 </header>
 
+<!-- ONLY 3 CATEGORIES -->
 <nav class="categories">
     <button class="active" onclick="filterVideos('All',this)">All</button>
     <button onclick="filterVideos('New',this)">New</button>
     <button onclick="filterVideos('Popular',this)">Popular</button>
-    <button onclick="filterVideos('Funny',this)">Funny</button>
-    <button onclick="filterVideos('Sports',this)">Sports</button>
-    <button onclick="filterVideos('News',this)">News</button>
-    <button onclick="filterVideos('Entertainment',this)">Entertainment</button>
 </nav>
 
 <div class="ad">
@@ -345,7 +343,7 @@ image:"https://picsum.photos/600/340?random=2"
 
 {
 title:"Funny Moments That Went Viral",
-category:"Funny",
+category:"Popular",
 views:"210K",
 date:"Yesterday",
 duration:"03:48",
@@ -354,7 +352,7 @@ image:"https://picsum.photos/600/340?random=3"
 
 {
 title:"Top Sports Moments",
-category:"Sports",
+category:"Popular",
 views:"76K",
 date:"Yesterday",
 duration:"05:20",
@@ -363,7 +361,7 @@ image:"https://picsum.photos/600/340?random=4"
 
 {
 title:"Breaking News Update",
-category:"News",
+category:"New",
 views:"154K",
 date:"Today",
 duration:"08:10",
@@ -372,7 +370,7 @@ image:"https://picsum.photos/600/340?random=5"
 
 {
 title:"Popular Entertainment Clips",
-category:"Entertainment",
+category:"Popular",
 views:"189K",
 date:"2 days ago",
 duration:"07:25",
@@ -483,7 +481,7 @@ function watchVideo(title){
 
     alert(
         "You selected: " + title +
-        "\\n\\nYour video player/link will be connected here."
+        "\n\nYour video player/link will be connected here."
     );
 
 }
