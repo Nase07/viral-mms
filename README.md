@@ -1,205 +1,270 @@
-# viral-mms
-A viral entertainment website featuring trending videos, news, updates, and popular content from around the web.
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Viral Videos</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #0f0f0f;
-    color: white;
+body{
+    background:#111;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-header {
-    background: #181818;
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+/* HEADER */
+.header{
+    background:#1b1b1b;
+    padding:18px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    border-bottom:1px solid #333;
 }
 
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 12px;
+.logo{
+    font-size:26px;
+    font-weight:bold;
+    white-space:nowrap;
 }
 
-.search {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    background: #292929;
-    color: white;
-    font-size: 16px;
+.logo span{
+    color:#ff2d55;
 }
 
-nav {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 12px 0;
+.search{
+    width:45%;
+    display:flex;
 }
 
-nav button {
-    border: none;
-    padding: 10px 18px;
-    border-radius: 20px;
-    background: #292929;
-    color: white;
-    white-space: nowrap;
-    cursor: pointer;
+.search input{
+    width:100%;
+    padding:12px 15px;
+    border:0;
+    outline:0;
+    background:#292929;
+    color:white;
+    border-radius:6px 0 0 6px;
 }
 
-nav button:hover {
-    background: #e50914;
+.search button{
+    border:0;
+    background:#ff2d55;
+    color:white;
+    padding:0 18px;
+    cursor:pointer;
+    border-radius:0 6px 6px 0;
 }
 
-.ad {
-    margin: 15px;
-    height: 90px;
-    background: #222;
-    border: 1px dashed #555;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
+/* CATEGORY BAR */
+.categories{
+    background:#181818;
+    padding:13px 5%;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    border-bottom:1px solid #292929;
 }
 
-.container {
-    padding: 10px 15px 30px;
+.categories button{
+    background:#292929;
+    color:#ddd;
+    border:0;
+    padding:9px 17px;
+    border-radius:20px;
+    cursor:pointer;
+    white-space:nowrap;
 }
 
-.section-title {
-    font-size: 22px;
-    margin: 15px 0;
+.categories button:hover,
+.categories button.active{
+    background:#ff2d55;
+    color:#fff;
 }
 
-.videos {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+/* AD */
+.ad{
+    margin:20px auto;
+    max-width:1100px;
+    height:90px;
+    background:#202020;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#777;
+    border:1px dashed #444;
 }
 
-.card {
-    background: #1c1c1c;
-    border-radius: 8px;
-    overflow: hidden;
+/* CONTENT */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
 }
 
-.thumbnail {
-    width: 100%;
-    height: 130px;
-    object-fit: cover;
-    background: #333;
+.section-title{
+    margin:25px 0 15px;
+    font-size:22px;
+    border-left:4px solid #ff2d55;
+    padding-left:10px;
 }
 
-.card-content {
-    padding: 10px;
+/* VIDEO GRID */
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
 }
 
-.title {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 6px;
+.card{
+    background:#1c1c1c;
+    border-radius:8px;
+    overflow:hidden;
+    transition:.25s;
 }
 
-.date {
-    font-size: 12px;
-    color: #999;
-    margin-bottom: 9px;
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 5px 20px rgba(0,0,0,.5);
 }
 
-.watch {
-    width: 100%;
-    padding: 9px;
-    border: none;
-    border-radius: 5px;
-    background: #e50914;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+.thumb{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#333;
+    overflow:hidden;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 25px;
+.thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-.pagination button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #292929;
-    color: white;
+.duration{
+    position:absolute;
+    right:8px;
+    bottom:8px;
+    background:rgba(0,0,0,.8);
+    padding:4px 7px;
+    font-size:12px;
+    border-radius:4px;
 }
 
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #888;
+.info{
+    padding:12px;
 }
 
-/* Video popup */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
+.title{
+    font-size:15px;
+    line-height:1.4;
+    height:42px;
+    overflow:hidden;
 }
 
-.modal-box {
-    width: 100%;
-    max-width: 700px;
-    background: #181818;
-    padding: 15px;
-    border-radius: 8px;
+.meta{
+    color:#888;
+    font-size:12px;
+    margin:8px 0;
 }
 
-.modal video {
-    width: 100%;
-    max-height: 70vh;
+.watch{
+    display:block;
+    text-align:center;
+    background:#ff2d55;
+    color:white;
+    text-decoration:none;
+    padding:9px;
+    border-radius:5px;
+    margin-top:8px;
+    cursor:pointer;
 }
 
-.close {
-    float: right;
-    font-size: 25px;
-    cursor: pointer;
-    margin-bottom: 10px;
+/* PAGINATION */
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:35px 0;
 }
 
-/* Desktop */
+.pagination button{
+    background:#292929;
+    border:0;
+    color:white;
+    padding:10px 18px;
+    border-radius:5px;
+    cursor:pointer;
+}
 
-@media (min-width: 700px) {
-    .videos {
-        grid-template-columns: repeat(4, 1fr);
+.pagination button:hover{
+    background:#ff2d55;
+}
+
+/* FOOTER */
+footer{
+    background:#181818;
+    border-top:1px solid #333;
+    padding:30px 5%;
+    text-align:center;
+    color:#888;
+    margin-top:30px;
+}
+
+footer a{
+    color:#aaa;
+    margin:0 8px;
+    text-decoration:none;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .video-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    .thumbnail {
-        height: 170px;
+    .search{
+        width:40%;
+    }
+}
+
+@media(max-width:650px){
+    .header{
+        flex-wrap:wrap;
     }
 
-    .container {
-        max-width: 1200px;
-        margin: auto;
+    .logo{
+        width:100%;
+        text-align:center;
+    }
+
+    .search{
+        width:100%;
+    }
+
+    .video-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .ad{
+        margin:15px 3%;
+    }
+
+    .title{
+        font-size:13px;
     }
 }
 </style>
@@ -207,285 +272,231 @@ footer {
 
 <body>
 
-<header>
+<header class="header">
 
-<div class="logo">🔥 Viral Videos</div>
+    <div class="logo">
+        🔥 Viral<span>Videos</span>
+    </div>
 
-<input
-class="search"
-id="search"
-type="text"
-placeholder="Search videos..."
-onkeyup="searchVideos()">
-
-<nav>
-<button onclick="showCategory('all')">All</button>
-<button onclick="showCategory('new')">New</button>
-<button onclick="showCategory('popular')">Popular</button>
-</nav>
+    <div class="search">
+        <input type="text" id="searchBox" placeholder="Search videos...">
+        <button onclick="searchVideos()">🔍</button>
+    </div>
 
 </header>
 
+<nav class="categories">
+    <button class="active" onclick="filterVideos('All',this)">All</button>
+    <button onclick="filterVideos('New',this)">New</button>
+    <button onclick="filterVideos('Popular',this)">Popular</button>
+    <button onclick="filterVideos('Funny',this)">Funny</button>
+    <button onclick="filterVideos('Sports',this)">Sports</button>
+    <button onclick="filterVideos('News',this)">News</button>
+    <button onclick="filterVideos('Entertainment',this)">Entertainment</button>
+</nav>
+
 <div class="ad">
-Advertisement
+    ADVERTISEMENT
 </div>
 
 <main class="container">
 
-<h2 class="section-title" id="heading">Latest Videos</h2>
+    <h2 class="section-title">🔥 Latest Videos</h2>
 
-<div class="videos" id="videoList"></div>
+    <div class="video-grid" id="videoGrid"></div>
 
-<div class="pagination">
-<button onclick="previousPage()">← Previous</button>
-<span id="pageNumber">Page 1</span>
-<button onclick="nextPage()">Next →</button>
-</div>
+    <div class="pagination">
+        <button onclick="previousPage()">← Previous</button>
+        <button onclick="nextPage()">Next →</button>
+    </div>
 
 </main>
 
 <footer>
-© 2026 Viral Videos — All Rights Reserved
+    <p>© 2026 ViralVideos. All rights reserved.</p>
+    <br>
+    <a href="#">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
 </footer>
-
-
-<!-- Watch Video Popup -->
-
-<div class="modal" id="modal">
-
-<div class="modal-box">
-
-<span class="close" onclick="closeVideo()">✕</span>
-
-<video id="player" controls>
-<source id="videoSource" src="" type="video/mp4">
-</video>
-
-<h3 id="videoTitle"></h3>
-
-</div>
-
-</div>
-
 
 <script>
 
 const videos = [
 
 {
-title: "Amazing Trending Video",
-category: "new",
-date: "Today",
-popular: true,
-thumbnail: "https://picsum.photos/600/400?random=1",
-video: ""
+title:"Amazing Viral Video You Should Watch",
+category:"Popular",
+views:"125K",
+date:"Today",
+duration:"04:32",
+image:"https://picsum.photos/600/340?random=1"
 },
 
 {
-title: "Funny Viral Moment",
-category: "new",
-date: "Today",
-popular: true,
-thumbnail: "https://picsum.photos/600/400?random=2",
-video: ""
+title:"Latest Trending Entertainment Video",
+category:"New",
+views:"98K",
+date:"Today",
+duration:"06:15",
+image:"https://picsum.photos/600/340?random=2"
 },
 
 {
-title: "Amazing Entertainment",
-category: "all",
-date: "Yesterday",
-popular: false,
-thumbnail: "https://picsum.photos/600/400?random=3",
-video: ""
+title:"Funny Moments That Went Viral",
+category:"Funny",
+views:"210K",
+date:"Yesterday",
+duration:"03:48",
+image:"https://picsum.photos/600/340?random=3"
 },
 
 {
-title: "Popular Trending Video",
-category: "popular",
-date: "Yesterday",
-popular: true,
-thumbnail: "https://picsum.photos/600/400?random=4",
-video: ""
+title:"Top Sports Moments",
+category:"Sports",
+views:"76K",
+date:"Yesterday",
+duration:"05:20",
+image:"https://picsum.photos/600/340?random=4"
 },
 
 {
-title: "New Viral Content",
-category: "new",
-date: "2 days ago",
-popular: false,
-thumbnail: "https://picsum.photos/600/400?random=5",
-video: ""
+title:"Breaking News Update",
+category:"News",
+views:"154K",
+date:"Today",
+duration:"08:10",
+image:"https://picsum.photos/600/340?random=5"
 },
 
 {
-title: "Top Trending Video",
-category: "popular",
-date: "3 days ago",
-popular: true,
-thumbnail: "https://picsum.photos/600/400?random=6",
-video: ""
+title:"Popular Entertainment Clips",
+category:"Entertainment",
+views:"189K",
+date:"2 days ago",
+duration:"07:25",
+image:"https://picsum.photos/600/340?random=6"
+},
+
+{
+title:"New Viral Video Of The Day",
+category:"New",
+views:"65K",
+date:"Today",
+duration:"04:10",
+image:"https://picsum.photos/600/340?random=7"
+},
+
+{
+title:"Most Watched Video This Week",
+category:"Popular",
+views:"350K",
+date:"3 days ago",
+duration:"09:15",
+image:"https://picsum.photos/600/340?random=8"
 }
 
 ];
 
-let currentCategory = "all";
-let currentPage = 1;
-const perPage = 6;
+let currentVideos = videos;
 
+function displayVideos(list){
 
-function displayVideos() {
+    const grid = document.getElementById("videoGrid");
 
-let list = videos.filter(video => {
+    grid.innerHTML = "";
 
-if(currentCategory === "all")
-return true;
+    list.forEach((video,index)=>{
 
-if(currentCategory === "popular")
-return video.popular === true;
+        grid.innerHTML += `
 
-return video.category === currentCategory;
+        <div class="card">
 
-});
+            <div class="thumb">
 
-let start = (currentPage - 1) * perPage;
-let end = start + perPage;
+                <img src="${video.image}" alt="${video.title}">
 
-let pageVideos = list.slice(start, end);
+                <span class="duration">
+                    ${video.duration}
+                </span>
 
-let html = "";
+            </div>
 
-pageVideos.forEach((video, index) => {
+            <div class="info">
 
-html += `
+                <div class="title">
+                    ${video.title}
+                </div>
 
-<div class="card">
+                <div class="meta">
+                    👁 ${video.views} • ${video.date}
+                </div>
 
-<img
-class="thumbnail"
-src="${video.thumbnail}"
-alt="${video.title}">
+                <a class="watch"
+                   onclick="watchVideo('${video.title}')">
+                   ▶ Watch Video
+                </a>
 
-<div class="card-content">
+            </div>
 
-<div class="title">
-${video.title}
-</div>
+        </div>
 
-<div class="date">
-${video.date}
-</div>
+        `;
 
-<button
-class="watch"
-onclick="watchVideo(${videos.indexOf(video)})">
-▶ Watch
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("videoList").innerHTML =
-html || "<p>No videos found.</p>";
-
-document.getElementById("pageNumber").innerText =
-"Page " + currentPage;
+    });
 
 }
 
+function filterVideos(category,button){
 
-function showCategory(category) {
+    document.querySelectorAll(".categories button")
+    .forEach(btn=>btn.classList.remove("active"));
 
-currentCategory = category;
-currentPage = 1;
+    button.classList.add("active");
 
-if(category === "new")
-document.getElementById("heading").innerText = "New Videos";
+    if(category==="All"){
+        currentVideos=videos;
+    }else{
+        currentVideos=videos.filter(v=>v.category===category);
+    }
 
-else if(category === "popular")
-document.getElementById("heading").innerText = "Popular Videos";
+    displayVideos(currentVideos);
+}
 
-else
-document.getElementById("heading").innerText = "All Videos";
+function searchVideos(){
 
-displayVideos();
+    const query =
+        document.getElementById("searchBox")
+        .value.toLowerCase();
+
+    const results=videos.filter(video =>
+        video.title.toLowerCase().includes(query)
+    );
+
+    currentVideos=results;
+
+    displayVideos(results);
+}
+
+function watchVideo(title){
+
+    alert(
+        "You selected: " + title +
+        "\\n\\nYour video player/link will be connected here."
+    );
 
 }
 
-
-function searchVideos() {
-
-let search =
-document.getElementById("search").value.toLowerCase();
-
-let cards = document.querySelectorAll(".card");
-
-cards.forEach(card => {
-
-let title =
-card.querySelector(".title").innerText.toLowerCase();
-
-card.style.display =
-title.includes(search) ? "block" : "none";
-
-});
-
+function nextPage(){
+    alert("Next page will load here.");
 }
 
-
-function watchVideo(index) {
-
-let video = videos[index];
-
-document.getElementById("modal").style.display = "flex";
-
-document.getElementById("videoTitle").innerText =
-video.title;
-
-document.getElementById("videoSource").src =
-video.video;
-
-document.getElementById("player").load();
-
+function previousPage(){
+    alert("Previous page will load here.");
 }
 
-
-function closeVideo() {
-
-document.getElementById("modal").style.display = "none";
-
-document.getElementById("player").pause();
-
-}
-
-
-function nextPage() {
-
-currentPage++;
-
-displayVideos();
-
-}
-
-
-function previousPage() {
-
-if(currentPage > 1) {
-
-currentPage--;
-
-displayVideos();
-
-}
-
-}
-
-
-displayVideos();
+displayVideos(videos);
 
 </script>
 
